@@ -18,9 +18,7 @@ contract FortyFourMiami is ERC721A, Pausable, Ownable, ReentrancyGuard {
             _;
     }
 
-    constructor(address _OzuraPayManager) ERC721A("Forty Four Miami", "FFM") {
-        OzuraPayManager = _OzuraPayManager;
-    }
+    constructor() ERC721A("Forty Four Miami", "FFM") {}
 
     function _baseURI() internal view override returns (string memory) {
         return baseURI;
@@ -68,11 +66,12 @@ contract FortyFourMiami is ERC721A, Pausable, Ownable, ReentrancyGuard {
 
     /**
      * @dev Returns the starting token ID.
-     * To change the starting token ID, please override this function.
      */
     function _startTokenId() internal view virtual override(ERC721A) returns (uint256) {
         return 1;
     }
+
+
 
     // The following functions are overrides required by Solidity.
     function supportsInterface(bytes4 interfaceId)
@@ -82,5 +81,9 @@ contract FortyFourMiami is ERC721A, Pausable, Ownable, ReentrancyGuard {
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
+    }
+    
+    function withdraw() public onlyOwner {
+        payable(owner()).transfer(address(this).balance);
     }
 }
