@@ -71,8 +71,6 @@ contract FortyFourMiami is ERC721A, Pausable, Ownable, ReentrancyGuard {
         return 1;
     }
 
-
-
     // The following functions are overrides required by Solidity.
     function supportsInterface(bytes4 interfaceId)
         public
